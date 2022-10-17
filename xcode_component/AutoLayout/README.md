@@ -8,15 +8,15 @@
 : 기기마다 화면의 해상도가 다르다. 그래서, AutoLayout이 없으면 기기 별로 화면을 구성해줘야 한다.     
 그러나, AutoLayout을 사용하면 자동으로 개발자의 의도에 맞게 화면이 출력되게 할 수 있다.     
       
-**_ 개발자의 의도? _**     
+**_개발자의 의도?_**     
 ex> 모든 기기에서 버튼이 우측 상단에 위치하게 하고 싶다.      
 ex> 이미지를 정가운데에 위치하게 하고 싶다.     
 ex> 글자를 좌측하단에 위치하게 하고 싶다.      
-이러한 의도를 AutoLayout을 사용하면, ** 단 하나의 화면 ** 작업만으로 모든 기기에서 의도에 맞게 화면이 출력되게 할 수 있다.    
+이러한 의도를 AutoLayout을 사용하면, **"단 하나의 화면"** 작업만으로 모든 기기에서 의도에 맞게 화면이 출력되게 할 수 있다.    
      
-**_ AutoLayout이 없으면? _**     
-: Xcode의 작업 해상도는 ** 정적 ** 이다.     
-이를 ** 기본 프레임 기반 레이아웃의 문제 ** 라고 하자.    
+**_AutoLayout이 없으면?_**     
+: Xcode의 작업 해상도는 **"정적"** 이다.     
+이를 **"기본 프레임 기반 레이아웃의 문제"** 라고 하자.    
 이에 따른 문제는 아래와 같다.    
 1. 동적으로 뷰를 위치 시킬 수 없다.    
 -> 모두 정적으로 뷰가 위치한다.     
@@ -25,17 +25,17 @@ ex> 글자를 좌측하단에 위치하게 하고 싶다.
          
 따라서, 애플의 기기는 매우 많고, 앞으로도 계속 출시될 것인데, 기기에 따라 해상도는 다르기에      
 기기별로 해상도에 맞게 화면을 구성하려면,      
-1. 기기에 맞는 해상도에 따라 수 십개의 화면 작업을 진행한다.     
+1. 기기에 맞는 해상도에 따라 수십개의 화면 작업을 진행한다.     
 2. AutoLayout을 사용하여 단 한 번의 작업만 진행한다.     
 우리는 작업의 효율을 위해 AutoLayout을 꼭 이해하고 적용하자!      
      
 ## AutoLayout 사용방법
-1. 제약사항(Constraint)로 뷰들에 제약사항을 걸어준다.      
+1. 제약사항(Constraint)으로 뷰들에 제약사항을 걸어준다.      
 2. AutoLayout을 적용할 뷰들은 꼭 위치, 크기가 지정되어야 한다.     
        
 ## Component 별로 AutoLayout 적용 방법
 ### Label
-**_ 특징 _**    
+**_특징_**    
 * 크기     
     Width
     1. 글자 수에 따라 Label의 Width 값이 바뀐다.     
@@ -43,7 +43,7 @@ ex> 글자를 좌측하단에 위치하게 하고 싶다.
      
     Height
     1. 폰트의 크기에 따라 결정된다.      
-    2. ** Lines ** 에서 줄 바꿈을 하면, Height의 값이 늘어난다.     
+    2. **"Lines"** 에서 줄 바꿈을 하면, Height의 값이 늘어난다.     
 
 * 위치     
     위치는 제약사항에 따라 달라진다.     
@@ -56,15 +56,15 @@ ex> 글자를 좌측하단에 위치하게 하고 싶다.
     시뮬레이터 < 작업화면
     :  
     Unable to simultaneously satisfy constraints.     
-        Probably at least one of the constraints in the following list is one you don't want. 
-    Try this: 
-        (1) look at each constraint and try to figure out which you don't expect; 
-        (2) find the code that added the unwanted constraint or constraints and fix it. 
-
+        Probably at least one of the constraints in the following list is one you don't want.     
+    Try this:       
+        (1) look at each constraint and try to figure out which you don't expect;        
+        (2) find the code that added the unwanted constraint or constraints and fix it.         
+         
     에러가 발생한다. (시뮬레이터에 컴포넌트가 나오지 않는다.)     
     아마, 상하좌우 모두 제약사항을 걸어주면, "unwanted constraint or constraints"를 수정해야 한다는 것을 알 수 있다.   
     그러므로, 작업화면보다 작은 휴대폰의 해상도를 위해     
-    ** "상하좌우에 모두 제약사항을 걸지 말자."     
+    **"상하좌우에 모두 제약사항을 걸지 말자."**            
     
 2. Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어줄 경우    
     시뮬레이터 > 작업화면     
@@ -83,7 +83,7 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
 개발자의 의도에 맞게 AutoLayout을 적용할 수 있다.     
 
 ### Button     
-**_ 특징 _**    
+**_특징_**    
 * 크기     
     Width
     1. 글자 수에 따라 Button의 Width 값이 바뀐다.     
@@ -100,7 +100,7 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
     4. AutoLayout으로 Button의 Height를 조절할 수 있다.    
     
     결론
-    1. ** Button의 크기는 고정되어 있지 않다. **    
+    1. **Button의 크기는 고정되어 있지 않다.**    
     2. Button의 최소 크기는 글자의 크기보다 작아지지 않는다.    
     3. AutoLayout으로 Button의 크기를 조절할 수 있다.     
     
@@ -123,12 +123,12 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
     
 2. Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어줄 경우    
     시뮬레이터 > 작업화면     
-    : "크기"는 ** 글자에 맞게 최소 크기로 작아진다.**         
+    : "크기"는 **글자에 맞게 최소 크기로 작아진다.**         
     제약사항을 걸어준 부분은 제약사항 크기만큼 떨어져 있고,     
     제약사항을 걸어주지 않은 부분은 휴대폰의 해상도에 맞게 공백이 늘어난 것을 확인할 수 있다.     
     
     시뮬레이터 < 작업화면
-    : "크기"는 ** 글자에 맞게 최소 크기로 작아진다.**     
+    : "크기"는 **글자에 맞게 최소 크기로 작아진다.**     
     제약사항을 걸어준 부분은 제약사항 크기만큼 떨어져있고,     
     제약사항을 걸어주지 않은 부분은 휴대폰의 해상도에 맞게 공백이 줄어든 것을 확인할 수 있다.
 
@@ -147,11 +147,11 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
         
 2. Button의 크기를 휴대폰의 해상도에 따라서 달라지지 않게 사용하고 싶으면,     
     Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주고,      
-    ** Width, Height 제약사항**을 걸어주어야 한다.    
+    **"Width, Height 제약사항"**을 걸어주어야 한다.    
     개발자의 의도에 맞게 AutoLayout을 적용할 수 있다.     
 
 ### Image View      
-**_ 특징 _**    
+**_특징_**    
 * 크기     
     Width
     1. 너비가 고정되어 있지 않다.     
@@ -163,7 +163,7 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
     3. 최소 크기가 없다. (AutoLayout을 잘못 설정하면 Image View가 안 보일 수 도 있다.)      
     
     결론      
-    1. ** Image View의 크기는 고정되어 있지 않다. **    
+    1. **Image View의 크기는 고정되어 있지 않다.**    
     2. AutoLayout으로 Image View의 크기를 조절할 수 있다.     
     3. 최소 크기가 없어 AutoLayout을 잘 못 설정하면 View가 화면에서 사라질 수 있다.     
     
@@ -186,12 +186,12 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
     
 2. Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어줄 경우    
     시뮬레이터 > 작업화면     
-    : "크기"는 ** 이미지가 조금 보일 정도로 최소 크기로 작아진다.**         
+    : "크기"는 **이미지가 조금 보일 정도로 최소 크기로 작아진다.**         
     제약사항을 걸어준 부분은 제약사항 크기만큼 떨어져 있고,     
     제약사항을 걸어주지 않은 부분은 휴대폰의 해상도에 맞게 공백이 늘어난 것을 확인할 수 있다.     
     
     시뮬레이터 < 작업화면
-    : "크기"는 ** 이미지가 조금 보일 정도로 최소 크기로 작아진다.**     
+    : "크기"는 **이미지가 조금 보일 정도로 최소 크기로 작아진다.**     
     제약사항을 걸어준 부분은 제약사항 크기만큼 떨어져있고,     
     제약사항을 걸어주지 않은 부분은 휴대폰의 해상도에 맞게 공백이 줄어든 것을 확인할 수 있다.
 
@@ -214,7 +214,7 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
         
 2. Image View의 크기를 휴대폰의 해상도에 따라서 달라지지 않게 사용하고 싶으면,     
     Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주고,      
-    ** Width, Height 제약사항**을 걸어주어야 한다.    
+    **"Width, Height 제약사항"**을 걸어주어야 한다.    
     개발자의 의도에 맞게 AutoLayout을 적용할 수 있다.     
 
 
