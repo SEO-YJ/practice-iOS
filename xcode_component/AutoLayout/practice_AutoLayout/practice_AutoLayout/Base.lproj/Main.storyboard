@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LwC-A0-Gl7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="practice_AutoLayout" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label AutoLayout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXQ-1E-liz">
+                                <rect key="frame" x="20" y="94" width="133" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWx-5H-pni">
+                                <rect key="frame" x="20" y="134.5" width="179" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="179" id="KGO-EL-WiF"/>
+                                    <constraint firstAttribute="height" constant="86" id="hqR-H3-hYV"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button AutoLayout">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
+                                </buttonConfiguration>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="trash.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hbS-cq-a2f">
+                                <rect key="frame" x="20" y="241.5" width="274" height="220"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="222.5" id="I0l-Y7-oIr"/>
+                                    <constraint firstAttribute="width" constant="274" id="lHI-A9-wRG"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xXQ-1E-liz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="28F-j5-3pn"/>
+                            <constraint firstItem="hbS-cq-a2f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CVd-Qz-25C"/>
+                            <constraint firstItem="gWx-5H-pni" firstAttribute="top" secondItem="xXQ-1E-liz" secondAttribute="bottom" constant="20" id="GvA-7o-RRa"/>
+                            <constraint firstItem="hbS-cq-a2f" firstAttribute="top" secondItem="gWx-5H-pni" secondAttribute="bottom" constant="20" id="hJv-S9-zA6"/>
+                            <constraint firstItem="gWx-5H-pni" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tXJ-fw-9Wv"/>
+                            <constraint firstItem="xXQ-1E-liz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ubm-YD-G43"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.840579710144929" y="79.6875"/>
+        </scene>
+        <!--Sub View Controller-->
+        <scene sceneID="6P5-nX-TuT">
+            <objects>
+                <viewController storyboardIdentifier="SubViewController" id="LwC-A0-Gl7" customClass="SubViewController" customModule="practice_AutoLayout" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f2s-Fx-UUh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bZC-z9-rDm">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeB-iy-njQ">
+                                        <rect key="frame" x="186.5" y="0.0" width="41.5" height="272.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62d-mp-pJd">
+                                        <rect key="frame" x="173.5" y="272.5" width="67" height="273"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="usw-jn-UST">
+                                        <rect key="frame" x="0.0" y="544.5" width="414" height="273"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="usw-jn-UST" firstAttribute="leading" secondItem="bZC-z9-rDm" secondAttribute="leading" id="kge-AR-r3e"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gZt-Hi-d2j"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gZt-Hi-d2j" firstAttribute="bottom" secondItem="bZC-z9-rDm" secondAttribute="bottom" id="4tW-kD-28j"/>
+                            <constraint firstItem="bZC-z9-rDm" firstAttribute="top" secondItem="gZt-Hi-d2j" secondAttribute="top" id="8Lb-jo-QNY"/>
+                            <constraint firstItem="gZt-Hi-d2j" firstAttribute="trailing" secondItem="bZC-z9-rDm" secondAttribute="trailing" id="L1S-ct-XID"/>
+                            <constraint firstItem="bZC-z9-rDm" firstAttribute="leading" secondItem="gZt-Hi-d2j" secondAttribute="leading" id="itQ-f8-VlF"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PLw-jS-8mg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="826" y="85"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="trash.fill" catalog="system" width="121" height="128"/>
+        <image name="trash.square.fill" catalog="system" width="128" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
