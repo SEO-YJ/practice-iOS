@@ -147,7 +147,7 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
         
 2. Button의 크기를 휴대폰의 해상도에 따라서 달라지지 않게 사용하고 싶으면,     
     Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주고,      
-    **"Width, Height 제약사항"**을 걸어주어야 한다.    
+    **"Width, Height 제약사항"** 을 걸어주어야 한다.    
     개발자의 의도에 맞게 AutoLayout을 적용할 수 있다.     
 
 ### Image View      
@@ -214,7 +214,7 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
         
 2. Image View의 크기를 휴대폰의 해상도에 따라서 달라지지 않게 사용하고 싶으면,     
     Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주고,      
-    **"Width, Height 제약사항"**을 걸어주어야 한다.    
+    **"Width, Height 제약사항"** 을 걸어주어야 한다.    
     개발자의 의도에 맞게 AutoLayout을 적용할 수 있다.     
 
 
