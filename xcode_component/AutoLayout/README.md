@@ -32,6 +32,12 @@ ex> 글자를 좌측하단에 위치하게 하고 싶다.
 ## AutoLayout 사용방법
 1. 제약사항(Constraint)으로 뷰들에 제약사항을 걸어준다.      
 2. AutoLayout을 적용할 뷰들은 꼭 위치, 크기가 지정되어야 한다.     
+
+## 강사님의 AutoLayout 설정 방법
+1) Navigation에서 AutoLayout 걸 컴포넌트 찾기      
+    2-1) 컴포넌트끼리 Constraints 걸어줄 경우: 컴포넌트 클릭 -> control+드래그 -> 다른 컴포넌트      
+    2-2) Height, Width 설정: control+드래그      
+2)  여러 Constraints 동시에 설정할 경우: Shift 누른 상태에서 선택      
        
 ## Component 별로 AutoLayout 적용 방법
 ### Label

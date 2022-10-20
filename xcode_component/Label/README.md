@@ -1,6 +1,13 @@
 # Label
  위 페이지는 xcode의 component의 "Label"에 대해 정리한 페이지입니다.    
  
+ ### Label의 Text를 코드에서 사용 
+ ```swift
+// Label의 Text 설정
+// String 타입의 값으로 할당
+outlet변수.text = "안녕하세여"
+```
+ 
  ### Label의 줄바꿈
  Attributes inspector     
  |_ Label     
