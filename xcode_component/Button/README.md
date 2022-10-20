@@ -2,6 +2,8 @@
  위 페이지는 xcode의 component의 "Button"에 대해 정리한 페이지입니다.    
  
 ```swift
+'Button' 컴포넌트 속성 정리
+
 Button        
     |_ Attributes inspector     
         |_ Button     

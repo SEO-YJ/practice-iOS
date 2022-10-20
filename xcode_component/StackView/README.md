@@ -40,11 +40,10 @@
     4) 컴포넌트를 UIView에 넣는다.      
     5) UIView와 컴포넌트의 Constraints를 건다.      
     6) 컴포넌트의 AutoLayout이 업데이트 되지 않을 경우, 'option+command+ + '로 컴포넌트의 AutoLayout을 업데이트 한다.  
-    
-    
-    
+```swift
+'Stack View' 컴포넌트 속성 정리
 
- Stack View      
+Stack View      
     |_ Attributes inspector     
         |_ Stack View   
             |_ Axis: 컴포넌트를 쌓는 스택뷰 축을 결정한다.      
@@ -56,6 +55,8 @@
             |_ Spacing: 스택뷰 내의 컴포넌트 사이의 공백을 관리한다.      
         |_ View     
             |_ Content Mode: Image View의 내부 이미지를 원하는 비율만큼 채울 수 있다.     
+```
+
     
 
 
