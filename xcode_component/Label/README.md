@@ -8,8 +8,8 @@
 outlet변수.text = "안녕하세여"
 ```
 
+## 'Label' 컴포넌트 속성 정리
 ```swift
-'Label' 컴포넌트 속성 정리
 
 Label 
     |_Attributes inspector     

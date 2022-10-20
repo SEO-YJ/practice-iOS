@@ -39,9 +39,10 @@
     3) UIView의 Height에 Constraints를 설정한다.      
     4) 컴포넌트를 UIView에 넣는다.      
     5) UIView와 컴포넌트의 Constraints를 건다.      
-    6) 컴포넌트의 AutoLayout이 업데이트 되지 않을 경우, 'option+command+ + '로 컴포넌트의 AutoLayout을 업데이트 한다.  
+    6) 컴포넌트의 AutoLayout이 업데이트 되지 않을 경우, 'option+command+ + '로 컴포넌트의 AutoLayout을 업데이트 한다. 
+    
+## 'Stack View' 컴포넌트 속성 정리     
 ```swift
-'Stack View' 컴포넌트 속성 정리
 
 Stack View      
     |_ Attributes inspector     
