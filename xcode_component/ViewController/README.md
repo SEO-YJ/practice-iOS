@@ -1,7 +1,11 @@
 # View Controller
  위 페이지는 xcode의 component의 "View Controller"에 대해 정리한 페이지입니다.    
- 
- ## 'View Controller' 컴포넌트 속성 정리
+       
+ ## View Controller 특징
+ : 휴대폰의 한 페이지를 담당하는 객체      
+        
+
+ ## View Controller 컴포넌트 속성 정리
  ```swift
 
 View Controller       

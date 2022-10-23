@@ -17,9 +17,27 @@
 ** 온도기호: option + shift + 8 **     
 : 온도 기호를 사용할 수 있습니다.      
        
-** 제약사항 업데이트: option + command + '+' **      
+** 제약사항 업데이트 **      
 : 컴포넌트의 제약사항이 업데이트 안되는 경우, 해당 컴포넌트를 누르고 위 키를 누르면 업데이트 됩니다.       
+1. option + command + '+'       
+2. Resolve Auto Layout -> Selected Views -> Update Constraint constants       
+    
+** 컴포넌트 복붙 **       
+1. command c + command v      
+2. option 키 누른 상태에서 드래그      
+      
+** 파일 생성: command + n **     
        
-** 컴포넌트 복붙: command c + command v **       
+** 프로젝트 생성: shift + command + n **     
+
+** Assistant로 원하는 코드 파일 보고 싶을 경우 **     
+1. Storyboard Editor의 컴포넌트 클릭(하위 단계 컴포넌트 클릭시 Automatic에서 코드파일 용이하게 알려줌)      
+2. Assistant를 켠다.      
+3. 우 상단의 Automatic 클릭       
+4. 원하는 코드파일 선택       
+ 
+ 
+
+
 
 

@@ -17,7 +17,7 @@ let iamgeName = "sun.max.fill"
 oulet변수.image = UIImage(systemName: imageName)
 ```
 
-## 'UIImageView' 컴포넌트 속성 정리
+## UIImageView 컴포넌트 속성 정리
  ```swift
 
 UIImageView    
