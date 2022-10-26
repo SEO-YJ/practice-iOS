@@ -43,23 +43,143 @@
  레이아웃: 각 구성요소를 제한된 공간 안에서 효과적으로 배열, 배치     
  iOS로 생각해보면, 각 Component를 UICollectionView 내에서 어떻게 효과적으로 배치할지 생각     
  
+ ## Collection View 사용 과정
+ 1. DataModel 파일 생성      
+ - Struct로 사용자 타입 생성     
+ - extension 사용하여 컬렉션 타입으로 데이터 할당     
+ - extension 의 컬렉션 타입은 static 변수 사용      
+         
+ 2. storyboard의 ViewController와 연결할 코드 파일 생성 후 연결      
+ 3. storyboard에 UICollectionView 넣고 AutoLayout 잡기      
+ 4. UICollectionView의 아울렛 변수 생성     
+ 5. CollectionViewCell에 컴포넌트 넣고 AutoLayout 잡기      
+ - 1. Content View와 component의 AutoLayout      
+ - 2. component끼리의 AutoLayout      
+ - 3. Image View, Button 과 같이 크기가 정해지지 않은 것은, 크기도 정해주어야 한다.      
+ 6. 커스텀 셀에 대해 표현할 코드파일 생성      
+ - 1. CocoaTouch Class에서 CollectionViewCell 파일 생성      
+ - 2. Storyboard의 CollectionViewCell과 연결       
+      1) Identity inspector -> Custom Class -> Class (현재 CollectionViewCell과 코드파일 연결)     
+      2) Attributes inspector -> Collection Reusable View -> Identifier (셀을 재사용하기 위한 재사용 구분자)   
+ 7. 커스텀 셀 코드파일에 셀의 component 아울렛 변수 생성     
+ 8. component의 데이터를 업데이트 할 함수 생성      
  
- 
-## Stack View 컴포넌트 속성 정리     
+ ### 9. 셀을 이용하여 화면에 데이터를 표현       
+ 1. DataSource Protocol      
+ : 데이터는 무엇이야? 몇 개야? 셀은 어떻게 표현할거야?를 CollectionView에 알려주기 위한 프로토콜 정의     
+ 1) collectionView.dataSource = self ( 현재 ViewController에서 CollectionView가 따라야할 규칙을 알려줌)     
+          
+ 2) DataSource Protocol 정의 (extension ... : UICollectionViewDataSource)      
+ - 1. Data: 어떠한 데이터를 사용할 것 인가?      
+           1) Data 저장: DataModel 파일       
+           2) Data 갯수: DataSource 메소드-> numberOfItemsInsection에서 return list.count     
+ - 2. Presentation: 셀을 어떻게 표현할 것인가?      
+           1) Cell 데이터 업데이트: CollectionViewCell 파일에서 컴포넌트의 데이터를 아울렛 변수에 할당하는 함수 생성 후, cellForItemAt 메소드에서 호출      
+           2) Cell 반환: DataSource 메소드-> cellForItemAt에서 재사용할 셀 생성 후 데이터 업데이트 후에 셀 반환     
+           
 ```swift
+extension (현재 ViewController): UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        /*
+        Data 갯수: 
+        컬렉션 뷰에게 몇 개의 셀이 필요하냐?
+        하나의 섹션 안에 몇개의 아이템을 사용할거야?
+        */
+        return (DataModel에 할당한 리스트).count // 데이터의 갯수 만큼 사용할거야~
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        /*
+        Presentation: 각 셀을 어떻게 표현할거냐?
+        */
+        // cellForItemAt indexPath: IndexPath  몇 번째에 해당하는 셀을 표현할지 결정
+            
+        // 1. 우리가 새로만든 커스텀 셀을 생성.
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "(커스텀셀의 Reusable Identifier)", for: indexPath) as? (커스텀셀 CollectionViewCell) else {
+            return UICollectionViewCell()
+        }
+        // for: indexPath: 재사용할 셀을 가져왔는데, 이게 몇 번째 셀에 해당하는 것 인지 알려줌
+        // as: ? 붙여준 이유는 타입 캐스팅을 실패할 수 있어서
+        // casting 하는 이유는, 데이터 업데이트 하는 함수를 사용하기 위해서.
+        // guard ... else : 타입 캐스팅을 실패할 수 있어, 옵셔널 타입이므로, 옵셔널 바인딩을 진행한다.
+        // (커스텀셀 CollectionViewCell)로 타입 캐스팅 되면 아래 코드르 실행하고, 실패하면 UICollectionViewCell을 반환한다. 
+        
+        /*
+         guard < 꼭 참이어야 하는 조건> else {
+         return ...
+         }
+         // 참일 경우 아래 코드 실행
+         ...
+         */
+        
+        /*
+         as?
+         : casting
+         Bruno: 남자 사람
+         남자: 사람 (상속받음)
+         
+         let joon = Namja() // 남자 이면서 사람
+         let joon = Saram() // 사람인 건 아나 남자인지 궁금
+         
+         joon as? Namja
+         
+         guard let nam = joon as? Namja else {
+         return
+         }
+         print 남자입니다
+         */
+        
+        
+        1) Cell 데이터 업데이트
+        // 2. 커스텀 셀에 해당하는 데이터를 준다.
+        let stock = stockList[indexPath.item]
+        // indexPath
+        // 1. 섹션에 대한 정보, 2. 섹션 안의 Row에 대한 정보
+        // indexPath.item
+        // 1. indexPath의 요소
+        
+        // 3. 커스텀 셀의 데이터를 업데이트 한다.
+        cell.configure(stock)
+        
+        2) Cell 반환
+        return cell
+    }
+}
+```           
 
-Stack View      
-    |_ Attributes inspector     
-        |_ Stack View   
-            |_ Axis: 컴포넌트를 쌓는 스택뷰 축을 결정한다.      
-                |_ Horizontal: 좌우로 컴포넌트를 쌓는다.(수평적)      
-                |_ Vertical: 위아래로 컴포넌트를 쌓는다.(수직적)   
-            |_ Distribution: 스택뷰 내의 컴포넌트 분배를 결정한다.     
-                |_ Fill: 컴포넌트를 스택뷰에 꽉 채운다. 각 컴포넌트의 크기는 개발자가 제약사항을 걸어 결정한다.     
-                |_ Fill Equally: 컴포넌트를 스택뷰에 동일한 비율로 채운다.     
-            |_ Spacing: 스택뷰 내의 컴포넌트 사이의 공백을 관리한다.      
-        |_ View     
-            |_ Content Mode: Image View의 내부 이미지를 원하는 비율만큼 채울 수 있다.     
+ 2. DelegateFlowLayout Protocol     
+ : 셀의 크기를 어떻게 하여 컬렉션뷰의 레이아웃을 정할거야?             
+  1) collectionView.delegate = self ( 현재 ViewController에서 CollectionView가 따라야할 규칙을 알려줌)      
+         
+  2) Delegate Protocol 정의 (extension ... : UICollectionViewDelegateFlowLayout)      
+ - 1. Layout: 셀을 어떻게 배치할 것 인가?       
+           1) Layout 배치: DelegateFlowLayout 메소드-> sizeForItemAt에서 CGSize메소드에 각 셀의 높이, 너비 값을 할당하여 반환     
+           (셀 하나의 사이즈를 정해준다.)
+```swift
+ extension (현재 ViewController): UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        1) Layout 배치
+        return CGSize(width: collectionView.bounds.width, height: 80)
+        // collectionView.bounds.width: 컬렉션 뷰의 너비
+    }
+}
+```
+  
+ 
+ 
+## UICollectionView 컴포넌트 속성 정리     
+```swift
+            
+CollectionViewCell
+    |_ Identity inspector
+        |_ Custom Class
+            |_ Class: CollectionViewCell 코드파일을 연결
+    |_ Attributes inspector
+        |_ Collection Reusable View
+            |_ Identifier: 셀을 재사용하기 위해, 재사용 구분자를 사용(Custom Class의 이름과 동일하게 사용)
+
 ```
 
     

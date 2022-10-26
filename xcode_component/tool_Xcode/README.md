@@ -35,6 +35,10 @@
 2. Assistant를 켠다.      
 3. 우 상단의 Automatic 클릭       
 4. 원하는 코드파일 선택       
+        
+** Storyboard의 View를 계층별로 보는 법 **       
+1. simulator 실행      
+2. 하단에 Debug View Hierarchy 클릭 (Debug View Hierachy 실행 시, 시뮬레이터는 동작하지 않는다.)
  
  
 
