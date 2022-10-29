@@ -68,6 +68,10 @@
  1. DataSource Protocol      
  : 데이터는 무엇이야? 몇 개야? 셀은 어떻게 표현할거야?를 CollectionView에 알려주기 위한 프로토콜 정의     
  1) collectionView.dataSource = self ( 현재 ViewController에서 CollectionView가 따라야할 규칙을 알려줌)     
+ Data, Presentation을 위임한다.       
+ DataSource는 Data, Presentation을 담당하고 있는데, 담당해줄 사람이 현재 ViewController로 할당해준다.     
+ 이는, 현재 ViewController가 Data, Presentation을 어떻게 해야하는지 collectionView에게 알려준다는 것이다. 
+   
           
  2) DataSource Protocol 정의 (extension ... : UICollectionViewDataSource)      
  - 1. Data: 어떠한 데이터를 사용할 것 인가?      
@@ -150,7 +154,10 @@ extension (현재 ViewController): UICollectionViewDataSource {
 
  2. DelegateFlowLayout Protocol     
  : 셀의 크기를 어떻게 하여 컬렉션뷰의 레이아웃을 정할거야?             
-  1) collectionView.delegate = self ( 현재 ViewController에서 CollectionView가 따라야할 규칙을 알려줌)      
+  1) collectionView.delegate = self ( 현재 ViewController에서 CollectionView가 따라야할 규칙을 알려줌)     
+ Layout을 위임한다.       
+ Delegate는 Layout을 담당하고 있는데, 담당해줄 사람이 현재 ViewController로 할당해준다.     
+ 이는, 현재 ViewController가 Layout을 어떻게 해야하는지 collectionView에게 알려준다는 것이다.  
          
   2) Delegate Protocol 정의 (extension ... : UICollectionViewDelegateFlowLayout)      
  - 1. Layout: 셀을 어떻게 배치할 것 인가?       
@@ -171,6 +178,12 @@ extension (현재 ViewController): UICollectionViewDataSource {
  
 ## UICollectionView 컴포넌트 속성 정리     
 ```swift
+CollectionView
+    |_ Size inspector
+        |_ Collection View
+            |_ Estimate Size: 셀 자체의 사이즈를 설정
+                |_ Automatic: 셀 사이즈를 상황에 따라서 자동으로 변경
+                |_ None: 셀 사이즈를 CGSize에 제공한 값으로 고정
             
 CollectionViewCell
     |_ Identity inspector
@@ -179,6 +192,7 @@ CollectionViewCell
     |_ Attributes inspector
         |_ Collection Reusable View
             |_ Identifier: 셀을 재사용하기 위해, 재사용 구분자를 사용(Custom Class의 이름과 동일하게 사용)
+            : Class의 이름이 고유하기에, Class 이름과 재사용 구분자를 동일하게 쓰는 것이 업계의 관행이다.
 
 ```
 

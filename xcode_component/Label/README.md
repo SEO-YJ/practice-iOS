@@ -16,6 +16,12 @@ Label
         |_ Label     
             |_ Lines: Label의 줄 갯수를 설정하여, 해당 값 만큼 줄을 가질 수 있습니다.    
                      줄의 갯수 만큼 Height 값이 균일하게 증가합니다.     
+    |_ Size inspector
+        |_ Content Hugging Priority
+        |_ Content Compression Resistance Priority
+        : Label의 크기가 작아지는 것을 저항하는 값 (쪼그라 지는 것에 대한 저항력)
+        : 두 컴포넌트의 값을 비교하여 더 작은 값의 컴포넌트가 줄어든다.
+        
 ```
 
 
