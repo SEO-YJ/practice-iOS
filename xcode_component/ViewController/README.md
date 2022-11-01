@@ -3,6 +3,12 @@
        
  ## View Controller 특징
  : 휴대폰의 한 페이지를 담당하는 객체      
+ 
+ ### Safe Area
+ : Contents가 짤리지 않고, 확실히 Contents를 보여줄 수 있는 영역     
+ 
+ ### Contents를 화면에서 더 많이 제공할 수 있는 방법 
+ : Safe Area에 걸려있는 AutoLayout을 SuperView에 걸어준다.
         
 
  ## View Controller 컴포넌트 속성 정리

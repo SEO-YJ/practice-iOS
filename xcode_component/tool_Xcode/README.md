@@ -38,7 +38,11 @@
         
 ** Storyboard의 View를 계층별로 보는 법 **       
 1. simulator 실행      
-2. 하단에 Debug View Hierarchy 클릭 (Debug View Hierachy 실행 시, 시뮬레이터는 동작하지 않는다.)
+2. 하단에 Debug View Hierarchy 클릭 (Debug View Hierachy 실행 시, 시뮬레이터는 동작하지 않는다.)      
+     
+** 시뮬레이터 실행 시 다크모드 실행방법      
+1. command+shift+A      
+2. 우상단 Simulator -> Features -> Toggle Appearance 클릭
  
  
 

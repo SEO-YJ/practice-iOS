@@ -223,7 +223,10 @@ Top, Bottom 중 1개, Trailing, Leading 중 1개 제약사항 걸어주어야
     **"Width, Height 제약사항"** 을 걸어주어야 한다.    
     개발자의 의도에 맞게 AutoLayout을 적용할 수 있다.     
 
-
+### Aspect Ratio
+Aspect: 측면       
+Ratio: 비율     
+: 비율을 설정하면, 컴포넌트의 크기가 비율을 유지한다.     
 
  
  
