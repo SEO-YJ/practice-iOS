@@ -24,7 +24,7 @@
     
 ** 컴포넌트 복붙 **       
 1. command c + command v      
-2. option 키 누른 상태에서 드래그      
+2. option 키 누른 상태에서 드래그 (View Controller는 1번 방법으로만 가능)        
       
 ** 파일 생성: command + n **     
        

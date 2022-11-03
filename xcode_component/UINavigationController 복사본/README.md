@@ -1,5 +1,5 @@
-# Navigation Controller
- 위 페이지는 xcode의 component의 "Navigation Controller"에 대해 정리한 페이지입니다.    
+# UINavigationController
+ 위 페이지는 xcode의 component의 "UINavigationController"에 대해 정리한 페이지입니다.    
        
  ## Navigation Controller란?
 : 여러 View Controller 간에 네비게이팅을 도와주는 View Controller

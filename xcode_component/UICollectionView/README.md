@@ -1,5 +1,5 @@
-# Collection View
- 위 페이지는 xcode의 component의 "Collection View"에 대해 정리한 페이지입니다.    
+# UICollectionView
+ 위 페이지는 xcode의 component의 "UICollectionView"에 대해 정리한 페이지입니다.    
        
  ## 리스트와 그리드
  iOS 개발자가 가장 많이 구현하는 것이 리스트와 그리드이다.    
