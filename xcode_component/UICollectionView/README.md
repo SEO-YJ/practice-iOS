@@ -248,7 +248,11 @@ CollectionView
                 |_ None: 셀 사이즈를 CGSize에 제공한 값으로 고정.  
                         개발자가 의도한 대로 Collection View의 사이즈를 잡기 위해서는, 
                         EstimatedItemSize의 값이 none이 되어야 한다.    
-                        * 속성과 같은 경우는 개발자들이 코드로 확인하는 것이 용이하기에, 코드로 작성하는 것이 좋다.
+                        * 속성과 같은 경우는 개발자들이 코드로 확인하는 것이 용이하기에, 코드로 작성하는 것이 좋다.     
+                |_ Min Spacing
+                    |_ For Cells: Cell 간의 간격
+                    |_ For Lines: 줄 간의 간격
+                                * 명시적으로 메소드를 생성하지 않으면, storyboard에 지정된 상수값으로 간격을 반환한다.
             
 CollectionViewCell
     |_ Identity inspector
@@ -283,7 +287,18 @@ extension FrameworkListViewController: UICollectionViewDelegate {
 ### Collection View를 화면에 더 많이 제공하는 방법
 : SuperView에 AutoLayout을 걸어준다.       
 Top: 1. 네비게이션 부분 Blur 처리 2. 노치 부분까지 Contents를 확인 가능       
-Bottom: 1. 화면 최하단 까지 contents 표시 가능
+Bottom: 1. 화면 최하단 까지 contents 표시 가능        
+      
+### Collection View의 셀이 재사용 되기 전에 준비하는 메소드
+```swift
+커스텀셀 파일에 선언
+override func prepareForReuse() {
+        super.prepareForReuse()
+        // 기존의 이미지 Reset
+        // 셀 재사용시 이미지뷰에 할당되어있는 이미지를 초기화
+        imageIconImageView.image = nil
+}
+```
 
 
 ## CollectionView 구현시 도움되는 문법 리스트
@@ -377,6 +392,7 @@ navigationController?.navigationBar.topItem?.title = "☀️ Apple Frameworks"
 ```swift
 // 현재 ViewController에 컬렉션 뷰의 Estimate Size를 설정하는 것이므로, viewDidLoad 함수에 설정
 // 아울렛 변수로 연결한 collectionView의 collectionViewLayout을 사용
+// storyboard에서는 변경 사항들을 확인하기 어려우니, 변경 사항을 수정할 경우에 코드로 작성해 놓는 것이 용이하다.     
 
 if let flowlayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
     flowlayout.estimatedItemSize = .zero
@@ -404,6 +420,19 @@ override func awakeFromNib() {
     nameLabel.numberOfLines = 1 // Label의 text를 줄 1개로 표시
     nameLabel.adjustsFontSizeToFitWidth = true // Label의 너비에 따라 폰트 사이즈를 조절
 }
+```     
+      
+### DataModel 파일 생성하지 않고, Assets의 Image 만을 가지고 CollectionView 생성 방법     
+```swift
+func ... numberOfItemsInsection ... {
+return 이미지갯수
+}
+
+func ... cellForItemAt ... {
+...
+let imageName = "...\(indexPath.item+1)"
+// indexPath.item은 0부터 아이템의 갯수까지 1씩 증가
+}
 ```
 
 
@@ -426,6 +455,16 @@ iOS 16+ 이상의 이미지는 system 이미지로 사용할 수 없어, 런타�
 SF symbols 이미지를 사용할 때, 꼭 이미지의 버전을 보거나,
 storyboard의 UIImageView에서 system에 이미지를 검색하여 있는지 확인한 후 사용하자.     
 
+3. Collection View Cell에 AutoLayout 잡을 시 주의 사항      
+Collection View Cell 내부의 component들을 AutoLayout 잡을 때, top, bottom 둘 다 AutoLayout을 잡고,      
+component의 height 역시 값을 할당하여 AutoLayout을 잡아주면,      
+반환된 Cell Size의 height에 맞게, AutoLayout의 값이 변경될 수 있다.     
+* xCode가 생각하는 우선 순위
+1. Collection View Cell의 반환된 크기      
+2. AutoLayout: Top, Bottom, Aspect Ratio       
+3. Height     
+테스트 결과 component의 height값이 변경됨을 확인하였다.      
+따라서, **Content View의 bottom의 AutoLayout을 잡지 말고 나머지 AutoLayout을 잡자!**      
 
 
 

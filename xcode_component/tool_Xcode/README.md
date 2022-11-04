@@ -42,9 +42,17 @@
      
 ### 시뮬레이터 실행 시 다크모드 실행방법
 1. command+shift+A      
-2. 우상단 Simulator -> Features -> Toggle Appearance 클릭
- 
- 
+2. 우상단 Simulator -> Features -> Toggle Appearance 클릭      
+     
+### 코드 컨벤션 - 코드 띄어쓰기 정리 방법
+1. 정리할 코드를 드래그     
+2. ctrl + i
+      
+### 시뮬레이터 실행시 키보드 입력 방법
+1. 시뮬레이터 실행      
+2. I/O -> Keyboard -> Connect Hardware Keyboard : 하드웨어의 키보드로 텍스트 입력      
+(설정 안할 시, Toggle Software Keyboard 자동으로 실행)
+I/O -> Keyboard -> Toggle Software Keyboard : 시뮬레이터의 키보드로 텍스트 입력   
 
 
 

@@ -30,4 +30,7 @@ Navigation Item
 ```swift
 // 네비게이션 컨트롤러의 네비게이션 아이템 title 작성 방법
 navigationController?.navigationBar.topItem?.title = "☀️ Apple Frameworks"
+
+// 현재 View Controller에 Navigation Controller가 Embed In 되어 있을 경우
+self.navigationItem.title = " "
 ```
