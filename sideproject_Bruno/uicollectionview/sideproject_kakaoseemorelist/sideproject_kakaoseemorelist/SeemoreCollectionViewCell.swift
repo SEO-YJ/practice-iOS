@@ -20,6 +20,6 @@ class SeemoreCollectionViewCell: UICollectionViewCell {
     
     func configure(_ data: DataModel) {
         iconImageImageView.image = UIImage(systemName: data.iconImage)
-        iconNameLabel.text = data.icanName
+        iconNameLabel.text = data.iconName
     }
 }
