@@ -312,6 +312,129 @@ override func prepareForReuse() {
 }
 ```
 
+### ViewController 내에 여러 개의 Collection View 연결하는 방법
+1. Collection View를 사용하기 위해서는 Delegate, DataSource를 채택해야 한다.      
+2. Delegate, DataSource는 각 Collection View의 메소드가 아니라, 현재 ViewController에서 제공하기에 프로토콜을    
+채택하고, 각 프로토콜에서는 함수를 하나 밖에 생성하지 못한다.      
+
+방법
+1. 각 Collection View 아울렛 변수를 통한 Delegate, DataSource 대리자 위임     
+```swift
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionViewSeemore.dataSource = self
+        collectionViewSeemore.delegate = self
+        
+        collectionViewNow.dataSource = self
+        collectionViewNow.delegate = self
+}
+```
+
+2. UICollectionViewDataSource 프로토콜 확장 부분에서 각 Collection View의 아울렛 변수로 조건을 설정     
+아래 코드와 같이, 각 CollectionView에 따라 조건문을 사용하여, 함수에서 반환하는 값을 달리함.     
+```swift
+extension SeemoreViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView ==  collectionViewSeemore{
+            return seemoreList.count
+        }
+        if collectionView == collectionViewNow {
+            return nowList.count
+        }
+            return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == collectionViewSeemore {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SeemoreCollectionViewCell", for: indexPath) as? SeemoreCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            let seemore = seemoreList[indexPath.item]
+            cell.configure(seemore)
+            return cell
+        }
+        
+        if collectionView == collectionViewNow {
+            guard let cellNow = collectionView.dequeueReusableCell(withReuseIdentifier: "NowCollectionViewCell", for: indexPath) as? NowCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            let now = nowList[indexPath.item]
+            cellNow.configure(now)
+            return cellNow
+        }
+        return UICollectionViewCell()
+    }
+} 
+```
+
+3. UICollectionViewFlowLayout 프로토콜 확장 부분에서 각 Collection View의 아울렛 변수로 조건을 설정     
+아래 코드와 같이, 각 CollectionView에 따라 조건문을 사용하여, 함수에서 반환하는 값을 달리함. 
+```swift
+extension SeemoreViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == collectionViewSeemore {
+            let cellInterPadding: CGFloat = 40
+            
+            let padding: CGFloat = 30
+        
+            let width = ( collectionViewSeemore.bounds.width - cellInterPadding * 3 - padding * 2 ) / 4
+            let height = width * 1.5
+            
+            return CGSize(width: width, height: height)
+        }
+        
+        if collectionView == collectionViewNow {
+            return collectionViewNow.bounds.size
+        }
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == collectionViewSeemore {
+            return 20
+        }
+        
+        if collectionView == collectionViewNow {
+            return .zero
+        }
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == collectionViewSeemore {
+            return 40
+        }
+        
+        if collectionView == collectionViewNow {
+            return .zero
+        }
+        return .zero
+    }
+}
+```
+
+**결론**     
+1. 각 Collection View는 현재 ViewController에게 대리자를 위임한다.     
+2. DataSource, Delegate 프로토콜을 채택하여 확장한 클래스들의 함수에서 각 CollectionView 별로 조건문을 이용해 컬렉션 뷰를 구성하고 싶은 값을 반환하도록 한다.     
+[여러 CollectionView 연결 참고링크](https://zeddios.tistory.com/169)       
+
+###  ViewController 내에 여러 개의 Collection View를 ScrollView 내에 넣는 방법      
+1. ViewController 위에 UIScrollView를 넣는다.      
+2. Scroll View의 AutoLayout을 잡는다. + Content Layout Guides를 체크 해제한다.
+3. Scroll View 내에 Stack View를 넣는다.      
+4. Scroll View와 Stack View 사이에 AutoLayout을 잡는다.      
+5. Scroll View와 Stack View의 너비를 동일하게 AutoLayout을 설정한다.(Equal widths)     
+(Propotional Width일 경우에는 Multiplier 값을 1로 할당한다.)      
+6. **Stack View 내에 넣을 Collection View의 height를 고정한다!!!**     
+(Vertical Stack View에 넣을 component들은 height값이 고정되어 있어야 한다.)      
+7. Collection View의 height들의 값의 합이 화면의 height 값 이상일 경우에 해당 View Controller는 스크롤 할 수 있다.   
+8. Vertical Stack View에 추가로 component들을 넣으면 Scroll View의 height는 Component의 height 만큼 자동으로 증가한다.   
+
+**결론**      
+1. Scroll View와 Stack View를 사용하면, **동적 높이를 자동으로 조절하여** 스크롤 화면을 구성할 수 있다.      
+2. Vertical Stack View의 경우 꼭 안에 넣을 component의 height를 고정하자.        
+[StackView 참고링크](https://jubakong.medium.com/swift-ios-scrollview%EB%A5%BC-%EC%8D%A8%EB%B3%B4%EC%9E%90-2-82bc2569c972)
+
 
 ## CollectionView 구현시 도움되는 문법 리스트
 ### 조건에 따라 Label의 text 색상 변경
