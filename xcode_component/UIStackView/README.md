@@ -1,5 +1,5 @@
-# Stack View
- 위 페이지는 xcode의 component의 "Stack View"에 대해 정리한 페이지입니다.    
+# UIStackView
+ 위 페이지는 xcode의 component의 "UIStackView에 대해 정리한 페이지입니다.    
        
  ## Stack View 특징     
  1. StackView는 컴포넌트 끼리 개발자가 AutoLayout을 설정 안해도 자동으로 컴포넌트를 알아서 채워준다.     

@@ -17,7 +17,8 @@
 View Controller       
     |_ Idendity inspector     
         |_ Custom Class     
-            |_ Class: Swift 코드 파일의 이름을 넣어주어, 코드 파일과 Storyboard의 View Controller를 연결     
+            |_ Class: Swift 코드 파일의 이름을 넣어주어, 코드 파일과 Storyboard의 View Controller를 연결   
+                     현재 Storyboard의 UIViewController가 연결한 UIViewController 코드 파일을 대변한다.  
         |_ Identity     
             |_ Storyboard ID: 스토리보드에서 해당하는 View Controller를 쉽게 찾기 위해 ID 설정       
                              주로, Custom Class의 Class 이름과 동일하게 설정.      

@@ -241,6 +241,19 @@ extension FrameworkListViewController: UICollectionViewDelegateFlowLayout {
 ## UICollectionView 컴포넌트 속성 정리     
 ```swift
 CollectionView
+    |_ Attributes inspector
+        |_ Collection View
+            |_ Scroll Direction: Collection View의 스크롤 방향을 결정한다.
+                |_ Horizontal: 수평으로 스크롤한다.
+                |_ Vertical: 수직으로 스크롤 한다.
+        |_ Scroll View
+            |_ Indicators
+                |_ Show Horizontal Indicator: 수평 Indicator를 설정한다. 체크하면 Indicator가 보인다.
+                |_ Show Vertical Indicator: 수직 Indicator를 설정한다. 체크하면 Indicator가 보인다.
+            |_ Scrolling
+                |_ Paging Enabled: Paging으로 설정한다.
+                                  Scroll: 슥슥 넘어간다.
+                                  Paging: 구분감 있게 넘어간다.
     |_ Size inspector
         |_ Collection View
             |_ Estimate Size: 자동으로 시스템 계산하는 것을 요청하는 것
@@ -267,7 +280,6 @@ CollectionViewCell
 
 ## CollectionView 구현시 도움되는 기술 리스트
 ### Collection View 셀 클릭 시 반응 확인   
-
 ```swift
 
 // 셀 클릭 시 반응 확인    
@@ -433,6 +445,15 @@ func ... cellForItemAt ... {
 let imageName = "...\(indexPath.item+1)"
 // indexPath.item은 0부터 아이템의 갯수까지 1씩 증가
 }
+```
+
+### 컬렉션뷰의 셀 사이즈가 컬렉션뷰와 같을 경우
+```swift
+extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    // collectionView.bounds.size는 width, height 정보를 다 담고 있어, 저것만 반환하면 된다.
+        return collectionView.bounds.size
+    }
 ```
 
 
