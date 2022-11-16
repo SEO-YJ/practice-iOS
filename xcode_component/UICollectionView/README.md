@@ -43,7 +43,8 @@
  레이아웃: 각 구성요소를 제한된 공간 안에서 효과적으로 배열, 배치     
  iOS로 생각해보면, 각 Component를 UICollectionView 내에서 어떻게 효과적으로 배치할지 생각     
  
- ## Collection View 사용 과정
+ ## Collection View 사용 과정 - UICollectionViewDataSource, UICollectionViewFlowLayout
+ 
  1. DataModel 파일 생성      
  - Struct로 사용자 타입 생성     
  - extension 사용하여 컬렉션 타입으로 데이터 할당     
@@ -237,6 +238,231 @@ extension FrameworkListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 ```    
+
+ ## Collection View 사용 과정 - UICollectionViewDiffableDataSource, UICollectionViewCompositionalLayout
+ 목적      
+ 1. 커스텀으로 레이아웃 관리     
+ 2. 복잡한 데이터 관리      
+       
+ ### 1. UICollectionViewDataSource -> UICollectionViewDiffableDataSource      
+ [Data Issue]      
+ : 서버에서 Data를 받아서 사용하는 경우, Data가 변경되는 경우에 Controller, UI가 가지고 있는 Data가 일치하지 않아     
+ 에러가 발생할 수 있다. 컴퓨터 입장에서는 Controller가 가지고 있는 Data가 참인지, UI가 가지고 있는 Data가 참인지 알 수 없기 때문이다.      
+       
+### Diffable Datasource        
+ **'Single Source of Truth Data'**        
+ 기존 구현 방식(UICollectionViewDataSource)에서는 어떤 Data가 참인지 알기 어려웠다.       
+ 따라서, **'참인 데이터를 한 개만 두자'** 라는 방법으로 해결하였다.      
+ 
+ UICollectionViewDataSource: 복잡, 에러 발생      
+ UICollectionViewDiffableDataSource: 간단, Data의 다른 점이 생기면 자동으로 업데이트      
+       
+**'Snapshot'**       
+: 한 가지 참인 데이터(Single Source of Truth Data)를 관리하는 객체      
+UICollectionViewDataSource에서는 IndexPath를 통해 아이템을 관리하였다면,     
+UICollectionViewDiffableDataSource에서는 Unique ID를 통해 섹션, 아이템을 관리한다.     
+Unique + Hashable     
+Unique ID로 각 데이터 간에 변화가 있는지 확인할 수 있다.     
+     
+UICollectionViewDiffableDataSource 특징     
+1. UICollectionViewDataSource는 Protocol이라 주로, 현재 ViewController에서 conform해서 사용     
+2. UICollectionViewDiffableDataSource는 Protocol이 아니라, Generic Class     
+UICollectionViewDiffableDataSource는 UICollectionViewDataSource Protocol을 conform하고 있음  
+3. UICollectionViewDataSource는 Controller가 웹 서비스 요청을 받고, UI에게 내가 바뀌었다고 말함.      
+이럴 때 주로 'reloadData'를 사용하나, 이는 애니메이션 되지 않는 효과가 나타나 사용자 경험이 저하될 수 있다.     
+      
+4. 가장 큰 문제는 **'Controller가 가지고 있는 Data가 참인지, UI가 가지고 있는 Data가 참인지 알 수 없다.'** 는 것이다.     
+왜냐하면, Controller와 UI가 자신만의 version인 truth(own version of the truth)를 가지게 되어 정해진 truth가 없기에 각각의 truth가 만나게 되면 에러가 발생한다.     
+5. 해결방법으로 Apple에서 Diffable DataSource를 도입한다.    
+    1) apply 메소드: 간단하며, 자동으로 다른 Data를 업데이트 해준다.    
+    2) Snapshot: 현재 UI state의 truth      
+        section, item에 대해 Unique Identifier가 있고, 이 Unique Identifier로 section, item을 업데이트 한다.     
+        
+```swift
+* Current Snapshot         
+
+Unique Identifier
+
+Lion
+
+Bear
+
+Tiger
+
+Controller Change -> apply 메소드 사용할 수 있음
+
+* New Snapshot
+
+Unique Identifier
+
+Rabbit
+
+Monkey
+
+Dog
+
+* New Snapshot                        * Current Snapshot
+
+Unique Identifier                     Unique Identifier
+
+Rabbit                                Lion
+
+Monkey              apply() ->        Bear
+
+Dog                                   Tiger
+
+* Current Snapshot
+
+Unique Identifier
+
+Rabbit
+
+Monkey
+
+Dog
+```
+
+
+### UICollectionViewDiffableDataSource를 이용해 CollectionView 구현방법
+1. Connect a diffable data source to your collection view       
+: Collection View에 diffable data source를 연결해라.     
+2. Implement a cell provider to configure your collection view's cells.      
+: Collection View의 셀들을 구성할 Cell provider를 구현하라.
+3. Generate the current state of the data.      
+: 데이터의 현재 상태를 생성하라.     
+4. Display the data in the UI.     
+: UI에 데이터를 표시하라.    
+[Diffable DataSource 참고 링크](https://zeddios.tistory.com/1197)
+
+
+### 2. UICollectionViewFlowLayout -> UICollectionViewCompositionalLayout      
+[Layout Issue]     
+: 기존 UICollectionViewFlowLayout은 간단한 디자인을 하기에는 유용하나, 현재 출시되고 있는 앱들은 복잡한 디자인으로 구성    
+되어있어, UICollectionViewFlowLayout으로 구현하는 것이 복잡하다.      
+     
+### Compositional Layout     
+중요 개념      
+Item > Group > Section > Layout      
+: Collection View의 Layout은 Item, Group, Section 3가지 개념으로 레이아웃을 짠다.      
+Item은 Group에 속하고, Group은 Section에 속하고, Section은 Layout에 속한다.      
+     
+### 요약 
+1. 기존 UICollectionView에서 Data, Presentation 구현 방법은 에러가 발생할 수 있다.     
+따라서, UICollectionViewDataSource -> UICollectionViewDiffableDataSource를 사용하자.      
+2. 기존 UICollectionView에서 Layout은 복잡한 구현시에 난이도가 매우 어렵다.      
+따라서, UICollectionViewFlowLayout -> UICollectionViewCompositionalLayout을 사용하자.      
+
+### Compositional Layout
+: Flow Layout의 단순하고 일반적인 디자인에서 더 복잡하고 디자인이 겸비된 Layout을 구성할 수 있는 객체     
+
+```swift
+ Layout
+ 
+ Section
+ ______________________________________________________________
+ |                                                             |
+ |  __Group________                                            |
+ |  |             |                                            |
+ |  |_____________|                                            |
+ |  |_Item________|                                            |
+ |  |             |                                            |
+ |  |_____________|                                            |
+ |_____________________________________________________________|
+ 
+  Section
+ ______________________________________________________________
+ |                                                             |
+ |  __Group________                                            |
+ |  |             |                                            |
+ |  |_____________|                                            |
+ |  |_Item________|                                            |
+ |  |             |                                            |
+ |  |_____________|                                            |
+ |_____________________________________________________________|
+```
+
+특징     
+1. 각각의 구성요소들을 **'따로'** 만든다.      
+2.      
+Layout: Section을 기준으로 나뉨     
+Section: Group으로 나뉨     
+Group: Item의 모임     
+Item: 가장 작은 단위      
+3. 작은 구성요소부터 순서대로 Item -> Group -> Section 결합하는 것이 Compositional Layout      
+ 
+[Compositional Layout 참고 링크](https://velog.io/@wannabe_eung/UiKit-UICollectionViewCompositionalLayout-%EC%9D%84-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90)
+
+## Collection View 사용 과정 - UICollectionViewDiffableDataSource, UICollectionViewCompositionalLayout (Code)
+```swift
+가정
+1. Storyboard에 CollectionViewCell 배치 완료
+2. CollectionViewCell 파일 생성
+3. CollectionView 아울렛변수 연결 완료
+
+//MARK: 1. DiffableDatasource 변수 선언하기 (Data: Cell의 데이터는?)
+// Class에 프로퍼티를 생성할 경우에 생성자를 만들지 않을 경우 값이 확실히 있다는 뜻으로 강제 추출 옵셔널을 사용하자.
+var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+
+// ItemIdentifierType 부분에는 Item의 type이 들어가야 하지만, 명시적으로 Item 임을 나타내기 위해 typealias 사용
+// DataModel은 Hashable 프로토콜을 적용
+typealias Item = DataModel
+
+// enum은 열거형이므로 Hashable하기에 따로 적용 X
+enum Section {
+    case main
+}
+
+//MARK: 2. DiffableDatasource 변수 초기화 (Presentation: Cell을 어떻게 표현할 것인가?)
+dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in 
+guard let cell = collectionView.dequeReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? CollectionViewCell else {
+return nil
+}
+cell.configure(item)
+return cell
+})
+
+//MARK: 3. snapshot 객체 생성 후 UICollectionViewDiffableDataSource에 참인 데이터 전달
+var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+snapshot.appendSections([.main])
+snapshot.appendItems(list, toSection: .main)
+dataSource.apply(snapshot)
+
+//MARK: 4. Compositional Layout 구성
+collectionView.collectionViewLayout = layout()
+
+private func layout() -> UICollectionViewCompositionalLayout {
+        // .fractional: 해당 길이의 비율을 사용하겠다.
+        // .fractionalWidth(0.33): 그룹의 너비 중에 아이템의 너비가 3분의 1만큼 사용하겠다.
+        // .fractionalHeight(1): 그룹의 높이와 아이템의 높이가 동일
+        
+        // 1. Item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        
+        // .fractionalWidth(1): 섹션의 너비와 그룹의 너비를 동일하게 하겠다.
+        // .fractionalWidth(0.33): 섹션의 높이를 그룹의 너비의 3분의 1만큼 사용하겠다.
+        
+        // 2. Group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.5))
+        // count: group 내에서 item을 3등분으로 균일하게 사용하겠다.
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+        
+        
+        // 3. Section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 70, bottom: 0, trailing: 70)
+        
+        // 4. Layout
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+}
+
+```
+ 
+ 
+ 
  
 ## UICollectionView 컴포넌트 속성 정리     
 ```swift
@@ -434,6 +660,24 @@ extension SeemoreViewController: UICollectionViewDelegateFlowLayout {
 1. Scroll View와 Stack View를 사용하면, **동적 높이를 자동으로 조절하여** 스크롤 화면을 구성할 수 있다.      
 2. Vertical Stack View의 경우 꼭 안에 넣을 component의 height를 고정하자.        
 [StackView 참고링크](https://jubakong.medium.com/swift-ios-scrollview%EB%A5%BC-%EC%8D%A8%EB%B3%B4%EC%9E%90-2-82bc2569c972)
+
+### Compositional Layout으로 레이아웃 구현 시, 동적인 높이 적용하는 방법
+```swift
+// 핵심: 레이아웃 사이즈를 컨텐츠 내용에 따라, 동적으로 변화하고 싶으면 '.estimated(숫자)'를 사용하자!
+
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
+        section.interGroupSpacing = 10
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+```
 
 
 ## CollectionView 구현시 도움되는 문법 리스트

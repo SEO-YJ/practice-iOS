@@ -15,7 +15,7 @@ class FrameworkCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         nameLabel.numberOfLines = 1
-        nameLabel.adjustsFontSizeToFitWidth = true 
+        nameLabel.adjustsFontSizeToFitWidth = true
     }
     
     func configure(_ framework: AppleFramework) {
