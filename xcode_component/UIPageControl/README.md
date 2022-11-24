@@ -14,6 +14,10 @@ pageControl.numberOfPages = 데이터의 갯수
 ```
 
  ### Page Control의 현재 페이지 설정
+  ```swift
+pageControl.currentPage = 인덱스 값
+```
+ 
  1. UICollectionView는 UIScrollView를 상속받아 구성된 클래스이다.
  2. 그러므로, UISrollView의 프로토콜을 확장할 수 있다.
   ```swift

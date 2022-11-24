@@ -679,6 +679,41 @@ extension SeemoreViewController: UICollectionViewDelegateFlowLayout {
         return layout
 ```
 
+### Compositional Layout으로 레이아웃 구현 시, 수평 방향으로 스크롤 적용하는 방법
+```swift
+    private func layout() -> UICollectionViewCompositionalLayout {
+        
+        // group 사이즈 그대로 따라가면 되기에 .fractional(1)
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        // height: Storyboard에서 200으로 고정했으므로 .absolute(200)
+        /*
+         NSCollectionLayoutGroup.horizontal로 했는데, 셀이 아래로 내려가는 이유
+         Section의 width가 작아 셀이 잘리기 때문이다.
+         
+         답
+         1. 스크롤로 적용할 경우: section.orthogonalScrollingBehavior = .continuous
+         2. 페이징을 적용할 경우: section.orthogonalScrollingBehavior = .groupPaging
+         3. 페이지를 가운데로 위치하여 페이징을 적용할 경우: section.orthogonalScrollingBehavior = .groupPagingCentered
+         */
+         
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(200))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.interGroupSpacing = 20
+        
+        section.visibleItemsInvalidationHandler = { (item, offset, env) in
+            let index = Int((offset.x / env.container.contentSize.width).rounded(.up))
+            self.pageControl.currentPage = index
+        }
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+```
 
 ## CollectionView 구현시 도움되는 문법 리스트
 ### 조건에 따라 Label의 text 색상 변경
@@ -821,6 +856,11 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
     // collectionView.bounds.size는 width, height 정보를 다 담고 있어, 저것만 반환하면 된다.
         return collectionView.bounds.size
     }
+```
+
+### 스크롤 제한 방법
+```swift
+         collectionView.alwaysBounceVertical = false
 ```
 
 

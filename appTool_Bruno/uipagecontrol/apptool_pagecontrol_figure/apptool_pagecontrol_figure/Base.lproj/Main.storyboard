@@ -30,6 +30,9 @@
                                         <buttonConfiguration key="configuration" style="plain" title="이전">
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="beforeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N5f-Q9-J8H"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7g-lA-0SC">
                                         <rect key="frame" x="207.5" y="0.0" width="206.5" height="31"/>
@@ -38,6 +41,9 @@
                                         <buttonConfiguration key="configuration" style="plain" title="다음">
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="afterTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ETg-uD-veA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

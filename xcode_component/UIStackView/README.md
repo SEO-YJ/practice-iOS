@@ -41,6 +41,11 @@
     5) UIView와 컴포넌트의 Constraints를 건다.      
     6) 컴포넌트의 AutoLayout이 업데이트 되지 않을 경우, 'option+command+ + '로 컴포넌트의 AutoLayout을 업데이트 한다. 
     
+6. Stack View 내에 ImageView를 넣을 경우, View를 먼저 넣는 이유     
+ImageView만 넣으면, Aspect Fit으로 Content mode를 설정 시, StackView의 크기에 맞게 비율이 정해지기에,     
+View를 먼저 넣고, View 내에 ImageView를 넣자.      
+
+
 ## Stack View 컴포넌트 속성 정리     
 ```swift
 

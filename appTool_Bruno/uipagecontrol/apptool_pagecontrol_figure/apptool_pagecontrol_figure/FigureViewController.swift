@@ -24,6 +24,12 @@ class FigureViewController: UIViewController {
             flowlayout.estimatedItemSize = .zero
         }
     }
+    @IBAction func beforeTapped(_ sender: Any) {
+        pageControl.currentPage -= 1
+    }
+    @IBAction func afterTapped(_ sender: Any) {
+        pageControl.currentPage += 1
+    }
 }
 
 extension FigureViewController: UICollectionViewDataSource {
