@@ -173,7 +173,7 @@ label.text = value
 # Combine 실습
 ## Combine 실습 1: Publisher & Subscriber
 ### 1. Publisher(Just) & Subscriber(sink)      
-** Just **         
+**Just**         
 : 데이터를 Subscriber에게 한 개 제공한다.      
     
 ```swift
@@ -191,7 +191,7 @@ Just Type 구성
 */
 ```
 
-** sink **
+**sink**
 : sink는 Publisher가 제공한 데이터를 받을 수 있는 클로져를 제공    
 ```swift
 let subscription1 = just.sink { value in
@@ -258,7 +258,7 @@ Deallocation of the result will tear down the subscription stream.
 
 
 ### 2. Publisher(.publisher) & Subscriber(sink)     
-** .publisher **       
+**.publisher**       
 : 데이터를 Subscriber에게 여러 개 제공한다.   
 ```swift
 let arrayPublisher = [1, 3, 5, 7, 9].publisher   
@@ -274,7 +274,7 @@ let arrayPublisher = [1, 3, 5, 7, 9].publisher
     
 
 ### 3. Publisher(.publisher) & Subscriber(assign)      
-** assign **     
+**assign**     
 : Subscriber이며 Publisher 뒤에 사용하는 메서드로 Publisher가 제공하는 데이터를 특정 객체의 키패스에 할당한다.    
 ```swift 
 class MyClass {
@@ -298,7 +298,7 @@ let subscription3 = arrayPublisher.assign(to: \.property, on: object)
 
 ## Combine 실습 2: Subject     
 ### 1. Publisher(PassthroughSubject, send) & Subscriber(sink) 
-** PassthroughSubject **      
+**PassthroughSubject**      
 : 전달한 값을 Publisher가 들고 있지 않고 바로 전달 해주는 Publisher
 
 ```swift
@@ -358,7 +358,7 @@ relay.send("hi")
 
 
 ### 2. Publisher(CurrentValueSubject, send) & Subscriber(sink) 
-** CurrentValueSubject **     
+**CurrentValueSubject**     
 : 전달할 값을 Publisher가 들고 있어 최근에 보낸 데이터를 알 수 있는 Publisher      
 
 ```swift
@@ -379,7 +379,7 @@ variable.value
 ```
 
 ### 3. Publisher(.publisher, (PassthroughSubject, CurrentValueSubject)) & Subscriber(.subscribe)
-** .subscribe **     
+**.subscribe**     
 : Publisher에게 다른 Publisher 데이터를 전달하는 메소드       
 ```swift
 let publisher = ["one", "two", "three"].publisher    
