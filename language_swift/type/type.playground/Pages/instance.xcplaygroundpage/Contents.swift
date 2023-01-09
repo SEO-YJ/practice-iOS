@@ -1,4 +1,7 @@
+//: [Previous](@previous)
+
 import UIKit
+import Foundation
 
 //MARK: Instance
 /*
@@ -103,7 +106,7 @@ print(myMac.account)
 // 1. 인스턴스는 초기화와 동시에 모든 프로퍼티에 값이 할당되어 있어야 한다.
 // 2. 프로퍼티에 값을 항상 보장하는 방법
 //      1) 타입을 정의할 때, 기본값을 할당한다.
-//      2) 인스턴스를 초기화할 때, 이니셜라이저에 기본값이 할당되지 않은 프로퍼티에 값을 할당한다.
+//      2) 인스턴스를 초기화할 때, 이니셜라이저를 통해 기본값이 할당되지 않은 프로퍼티에 값을 할당한다.
 // 3. 타입의 프로퍼티에 기본값을 할당하면, 인스턴스가 생성되면서 초기값을 가지게 된다.
 // 4. 인스턴스를 상수로 선언하여도, 인스턴스의 저장 프로퍼티가 변수로 선언되어 있으면, 다른 값을 할당할 수 있다.
 
@@ -171,10 +174,8 @@ class GalaxyBuds {
     var generation: Int
     var caseColor: String?
     
-    init(model: String, color: String, generation: Int, caseColor: String) {
-        self.model = model
-        self.color = color
-        self.generation = generation
+    convenience init(model: String, color: String, generation: Int, caseColor: String) {
+        self.init(model: model, color: color, generation: generation)
         self.caseColor = caseColor
     }
     
@@ -193,7 +194,7 @@ hisBuds.caseColor
 
 
 //MARK: 암시적 추출 옵셔널
-// 인스턴스 사용시에 꼭 필요한 프로퍼티이지만, 초기값을 할당할 필요가 없을 경우 사용
+// 인스턴스 사용시에 꼭 필요한 프로퍼티이지만, 초기값을 할당할 하지 않고자 할 때 사용
 
 class GalaxyUser {
     var name: String
@@ -220,7 +221,7 @@ myUser.printUsersMachine()
 
 
 //MARK: 실패 가능성이 있는 이니셜라이저
-// 초기값이 이니셜라이저로 잘못 전달된 경우, 인스턴스 생성에 실패할 수 있다.
+// 잘못된 초기값이 이니셜라이저로 전달된 경우, 인스턴스 생성에 실패할 수 있다.
 // 인스턴스 생성에 실패할 경우 nil 반환
 // 인스턴스 생성을 성공할 수도, 실패할 수도 있으므로 이니셜라이저의 반환 타입은 옵셔널
 
@@ -285,3 +286,6 @@ appleUserSeo = nil
 // appleUserSeo 인스턴스를 메모리에서 해제하여 디이니셜라이저 호출
 // 애플 유저 Seo Bruno의 아이폰 모델명은 아이폰 13 mini입니다!
 // 유저의 아이폰 13 mini이 아이폰 14 pro로 업그레이드 되었습니다!
+
+
+//: [Next](@next)

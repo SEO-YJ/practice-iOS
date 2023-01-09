@@ -27,17 +27,36 @@ import Foundation
 */
 
 struct Computer {
+    enum Component: String {
+        case mouse = "mouse야", keyboard = "keyboard야"
+    }
+    
+    static var name: String = "computer"
     var battery: Int = 100
-    let manufacturer: String = "Apple"
+    let manufacturer: String = "apple"
+    var mouse: Computer.Component
 
-    func saveData() {
+    mutating func saveData() {
+        battery = 70
         print("데이터를 저장합니다.")
     }
 
     func playVideo() {
         print("영상을 재생합니다.")
     }
+    
+    func chooseComponent(name: Component) {
+        print("\(name.rawValue)")
+    }
 }
+
+var com1 = Computer(mouse: .mouse)
+print(com1.mouse)
+
+
+
+
+
 
 /*
 타입 내부 구성
@@ -84,7 +103,6 @@ var hwang: SoccerPlayer = SoccerPlayer(name: "황희찬", position: .wing)
 
 // 인스턴스를 생성하면, 타입의 내부 메소드를 .을 이용해 호출 할 수 있다.
 son.shoot()
-
 son.position = SoccerPlayer.Position.goalKeeper
 son.shoot()
 

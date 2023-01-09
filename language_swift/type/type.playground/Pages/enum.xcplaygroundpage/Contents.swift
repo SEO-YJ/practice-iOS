@@ -1,4 +1,7 @@
+//: [Previous](@previous)
+
 import UIKit
+import Foundation
 /*
 열거형 (Enumeration)
 정의
@@ -97,3 +100,5 @@ func selectBrand(brand: Brand) {
 
 selectBrand(brand: .samsung)
 
+
+//: [Next](@next)
