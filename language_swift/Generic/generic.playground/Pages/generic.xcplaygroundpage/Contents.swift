@@ -45,6 +45,7 @@ swapTwoValues(&aInt, &bInt, &aString, &bString)
 print("\(aInt)와 \(bInt)값이 변경되었다!")
 print("\(aString)와 \(bString)값이 변경되었다!")
 
+
 func swapTwoYujun<Yujun>(_ a: inout Yujun, _ b: inout Yujun) {
     let tempA = a
     a = b
@@ -56,10 +57,8 @@ var bYujun = 1000
 swapTwoYujun(&aYujun, &bYujun)
 print(aYujun, bYujun)
 
-//MARK: 타입 파라미터 T
-/*
 
- */
+//MARK: 타입 파라미터 T
 // 타입 파라미터 예시: Dictionary
 var dic1 = [1: "one", 2: "two"]
 for (key, value) in dic1 {
@@ -143,6 +142,21 @@ var arrInt = [1, 2, 3, 4, 5, 6]
 var arrValue = 4
 print("Index 값은:", findIndex(ofString: arrValue, in: arrInt)!)
 
+func findNumber<T: Equatable>(valueString: T, arr: [T]) -> Int? {
+    for (index, value) in arr.enumerated() {
+        if value == valueString {
+            return index
+        }
+    }
+    return nil
+}
+
+var arrString = ["a", "b", "c", "d", "e"]
+var arrStringValue = "b"
+print(findNumber(valueString: arrStringValue, arr: arrString)!)
+
+
+
 
 //MARK: 제네릭 타입
 /*
@@ -190,6 +204,7 @@ struct GenericStack<T> {
 var anyStack = GenericStack(items: ["hi", "good", "bye"])
 // 제네릭 타입의 가상의 타입(placeholder 타입)이 String으로 정해진다.
 anyStack.push("yoyo")
+anyStack.push("yooooojun")
 anyStack.items
 
 extension GenericStack {

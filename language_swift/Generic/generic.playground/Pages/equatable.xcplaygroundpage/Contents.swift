@@ -12,21 +12,34 @@
  */
 
 class AClass: Equatable {
+    // Equatable 프로토콜 준수해야함
+    static func == (lhs: AClass, rhs: AClass) -> Bool {
+        return lhs.value == rhs.value
+    }
+    
     var value: Int
     
     init(_ value: Int) {
         self.value = value
     }
     
+    /*
     public static func == (lhs: AClass, rhs: AClass) -> Bool {
         return lhs.value == rhs.value
     }
+     */
 }
 
 var a = AClass(5)
-var b = AClass(10)
+var b = AClass(5)
 
 if a == b {
+    print("the same")
+} else {
+    print("different")
+}
+
+if a != b {
     print("the same")
 } else {
     print("different")
