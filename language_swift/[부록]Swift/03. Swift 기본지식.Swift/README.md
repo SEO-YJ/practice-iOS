@@ -1,41 +1,58 @@
-# practice-swift
- 위 리포지토리는 "Swift" 언어를 공부하는 곳 입니다.
- 
- Swift의 각 문법들을 하위 폴더에 정리하였습니다.
- 
- * 폴더 이름 컨벤션 우선순위
- 1. 소문자
- 2. 하이픈 (-)
- 3. 띄어쓰기가 포함된 단어일 경우에는 Camel case 
- ex> computerScience
- 4. 목적 - 개발환경
- 5. 강의, 공식문서 등은 그대로 작명
-       
-* language-swift xcode 프로젝트 이름 컨벤션
-1. 소문자        
-2. 2단어 이상은 언더바(_)로 구분       
-       
-* project-swift xcode 프로젝트 이름 컨벤션
-1. 소문자      
-2. 동사로 시작될 경우에 소문자 Camel case       
- 
- * 목적: 폴더로 어떤 것을 할 것 인지       
- * 개발환경: 개발 언어, 개발 툴 등
- 
-* 문법의 순서는 **'Swift'** 언어 공식문서인         
- The Swift Programming Language -> Language Guide를 참조하여 정리하였습니다.         
- 
- * 코드에 포함된 내용은
- 1. 문제
- 2. 문법을 적용한 코드
- 3. 왜 이렇게 작성하였는가에 대한 이유
- 4. 코드 컨벤션
- 
- 위 내용들을 정리하면서 공부해 나가겠습니다!
+# Swift 기본지식
 
- **'코드 컨벤션'** 의 경우에 공부해 나가면서 따로 규칙을 만들어가며 공부하고 있습니다.
+## Variable
+- 변수란?     
+    - 프로그램 데이터를 저장하는 공간       
+- 변수 생성 방법          
+    - `var` 키워드로 선언     
 
-Swift 로드맵을 따라 공부해보겠습니다.
+## String & Integer
+- swift의 변수에는 여러 타입을 저장 가능     
+    - 변수에 타입이 한 번 지정 되면, 다른 타입의 프로그램 데이터를 할당할 수 없다.    
+- `String` 타입: 문자열을 나타냄     
+- `Int` 타입: 정수를 나타냄            
 
-<img src="./img/swift로드맵.png" width="900" height="1000">
+```swift
+var name = "yujun seo"
+// name = 25 -> String 타입으로 이미 지정되어 Int 타입 할당할 수 없다.
 
+// 큰숫자는 "_" 를 써서 읽기 쉽게 숫자를 표현할수 있음
+// "_"(underscore)를 사용하여 코드의 가독성을 높일 수 있음.
+var myAccountMoney = 5_000_000_000
+var anyBigNumber = 1000200300
+```
+
+## Double & Booleans
+- `Double` 타입: 소수점 표현     
+- `Bool` 타입: 참, 거짓 표현(true, false)      
+
+## String Interpolation
+- 변수에 할당된 프로그램 데이터를 문자열로 표현 가능
+- 방법: `\(변수)`
+
+```swift
+var age = 25
+var introduce = "My age is \(age) "
+```
+     
+## Constant
+- 상수란?       
+    - 상수도 변수와 마찬가지로 프로그램 데이터를 저장하는 공간      
+- 상수 생성 방법       
+    - `let` 키워드로 선언      
+- 변수와 상수 차이점      
+    - 변수는 할당된 프로그램 데이터를 변경 가능      
+    - 상수는 할당된 프로그램 데이터를 변경 불가
+
+## Type Annotation(명시적 타입)
+- 변수 선언시 타입을 같이 명시 가능
+- 변수 선언시 타입 없이 명시도 가능
+    - 시스템이 타입 추론함 (type inference)
+
+```swift
+// 명시적 타입 기입 안함 -> Type Inference(타입추론)
+var age = 25
+
+// Type Annotation(명시적 타입)
+var age: Int = 25
+```
