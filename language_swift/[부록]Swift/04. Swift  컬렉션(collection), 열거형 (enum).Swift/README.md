@@ -111,7 +111,7 @@ var emptySet2 = Set<Int>()      // Type Annotation 없이 빈 Set 선언
 ### Tuple
 
 - 프로그램 데이터들을 `하나의 데이터`로 표현      
-- 접근      
+- 접근 방법      
     - 1. 포지션     
     - 2. 이름      
     
@@ -137,11 +137,11 @@ rawEarPhone.1   // 포지션으로만 접근 가능
 
 - 서로 관계있는 값들을 모은 타입               
 - 특징        
-    - 함수의 전달인자로 전달시, enum은 선택지가 정해져 있어 안전함.       
-    - 연관된 값들을 표현할 경우, enum이 편함.
+    - 1. 함수의 전달인자로 전달시, enum은 선택지가 정해져 있어 안전함.       
+    - 2. 연관된 값들을 표현할 경우, enum이 편함.
 
 ```swift
-// 월을 한번 enum으로 표현
+// 월을 enum으로 표현
 // 특정 타입(월)에 관해 연관되어 있는 값들 (1월,2월,3월...) 모은 타입
 enum Month {
     case jan
@@ -161,9 +161,8 @@ enum Month {
 var thisMonth: Month = .dec     // Type Annotation 적용
 
 
-// 연관값(associated value)을 가지고 있는 형태 
+//MARK: 연관값(associated value)을 가지고 있는 형태 
 // 기존의 미디어 타입 + 파일 확장자도 문자열로 받을수 있게 수정
-
 enum Media {
     case video(String)
     case audio(String)
@@ -173,12 +172,11 @@ var mp3 = Media.audio("mp3")      // Type Annotation 적용 X
 var h264 = Media.video("h264")
 
 
-// Enum에 value를 할당해서 표시할 경우
+//MARK: Enum에 value를 할당해서 표시할 경우
 // 기본 value의 타입을 표시
 
 // 1. Int 형을 이용해 enum의 case의 value값을 할당하는 방법
 // Int 타입의 경우, 맨 위 케이스 부터 0으로 시작
-
 enum EngClass: Int {
     case grammarClass
     case interchangeClass
