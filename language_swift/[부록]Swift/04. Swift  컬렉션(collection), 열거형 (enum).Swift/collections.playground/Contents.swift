@@ -91,7 +91,93 @@ var emptySet2 = Set<Int>()
 
 
 //MARK: Tuple
+var earPhone = (brand: "galaxy", name: "buds1")
+var myEarPhoneName = earPhone.self
+print(myEarPhoneName.self)
+print(myEarPhoneName.brand) // 이름 접근
+print(myEarPhoneName.name)  // 이름 접근
+print(myEarPhoneName.0)     // 포지션 접근
+print(myEarPhoneName.1)     // 포지션 접근
+// print(myEarPhoneName.2)     // 없는 포지션 접근시 에러 발생
+                            // Value of tuple type '(brand: String, name: String)' has no member '2'
+ 
+var rawEarPhone = ("apple", "Air pod")  // 이름 없이 tuple 생성
+rawEarPhone.0   // 포지션으로만 접근 가능
+rawEarPhone.1   // 포지션으로만 접근 가능
 
 
 //MARK: Enum
+// 한글식 표현 보다 영어 표현 그대로 사용하자.
+// 영어 표현으로 찾아야 더욱 다양한 정보들을 구글에서 얻을 수 있다.
+
+// 연관된 값들을 표현할 때 enum 타입이 편하다.
+
+// 월을 한번 enum으로 표현
+// 특정 타입(월)에 관해 연관되어 있는 값들 (1월,2월,3월...) 모은 타입
+enum Month {
+    case jan
+    case feb
+    case mar
+    case ari
+    case may
+    case jun
+    case jul
+    case aug
+    case sep
+    case oct
+    case nov
+    case dec
+}
+
+var thisMonth: Month = .dec   // Type Annotation 적용
+
+// Associated Value(연관된 값)
+enum Media {
+    case video(String)  // case 옆에 Type 명시
+    case audio(String)
+}
+
+var mps = Media.audio("mp3")    // Type Annotation 적용 X
+var h246 = Media.video("h246")
+
+
+// Enum에 value를 할당해서 표시
+// 기본 value의 타입을 표시
+
+// 1. Int 형을 이용해 enum의 case의 value값을 할당하는 방법
+enum EngClass: Int {
+    case grammarClass
+    case interchangeClass
+    case professionalClass
+}
+
+var myEngClass: EngClass = .professionalClass
+myEngClass.rawValue // Ex> 서버와 통신할 때, case 값을 숫자로 저장하고 싶을 경우 사용
+
+let yourEngClass = EngClass(rawValue: 1)    // Ex> 서버에서 case 분류가 숫자로 되어있을 경우
+                                            // 실제로 프로그램 돌릴 때는, 숫자 -> case로 사용할 경우
+// let noneEngClass = EngClass(rawValue: 5)    // 해당하는 case가 없으므로 nil 반환
+
+
+// 2. String 형을 이용해 enum의 case의 value값을 할당하는 방법
+enum MathClass: String {
+    case basicClass
+    case middleClass
+    case highClass = "high"
+}
+
+var myMathClass = MathClass(rawValue: "basicClass") // case 이름으로 접근
+var anotherMathClass = MathClass(rawValue: "high")  // enum 타입의 case에 할당한 value로 접근하면 case 할당
+
+
+// Ex> 서버에서 enum의 rawValue값을 String으로 저장하는 경우
+enum Direction: String {
+    case up
+    case down
+    case leftRight = "left_right"   // Ex> Swift: Camel Case, Server: Underscore
+}
+
+var dir: Direction = .up
+var serverData = dir.rawValue
+
 

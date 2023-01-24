@@ -46,7 +46,7 @@ var introduce = "My age is \(age) "
 
 ## Type Annotation(명시적 타입)
 - 변수 선언시 타입을 같이 명시 가능
-- 변수 선언시 타입 없이 명시도 가능
+- 변수 선언시 타입 없이 선언 가능
     - 시스템이 타입 추론함 (type inference)
 
 ```swift

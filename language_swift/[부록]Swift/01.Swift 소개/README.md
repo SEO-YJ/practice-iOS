@@ -11,4 +11,4 @@
         - 문법, 시스템을 통해 위험성 제거        
     **3. Fast**        
         - 더 빠른 속도로 기존 언어 대체       
- - [오픈소스 링크](https://github.com/apple/swift))        
+ - [오픈소스 링크](https://github.com/apple/swift)        
